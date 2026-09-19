@@ -63,28 +63,28 @@ body::before{
 /* ============ home ============ */
 #screen-home{align-items:center;justify-content:center;text-align:center;overflow-y:auto;}
 .home-inner{display:flex;flex-direction:column;align-items:center;width:100%;max-width:400px;padding:8px 0;}
-.logo-badge{width:58px;height:58px;display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:9px;
+.logo-badge{width:52px;height:52px;display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;
   animation:floaty 4s ease-in-out infinite;}
-.logo-badge span{border-radius:13px;background:#7c5cff;box-shadow:0 6px 24px rgba(124,92,255,.35);}
+.logo-badge span{border-radius:12px;background:#7c5cff;box-shadow:0 6px 24px rgba(124,92,255,.35);}
 .logo-badge span:nth-child(3){background:#00e0c6;box-shadow:0 6px 24px rgba(0,224,198,.45);}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
+h1#homeTitle{font-size:24px;font-weight:900;letter-spacing:1px;line-height:1.15;
   background:linear-gradient(120deg,#fff 20%,#a99cff 55%,#5ef2d6 90%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px;}
-#homeSub{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:12px;line-height:1.5;padding:0 10px;}
+#homeSub{font-size:10.5px;color:rgba(255,255,255,.45);margin-bottom:10px;line-height:1.5;padding:0 10px;}
 
-.mode-cards{display:flex;flex-direction:column;gap:7px;width:100%;}
-.mode-card{display:flex;align-items:center;gap:10px;padding:10px 12px;
-  border-radius:15px;border:1px solid rgba(255,255,255,.1);
+.mode-cards{display:flex;flex-direction:column;gap:5px;width:100%;}
+.mode-card{display:flex;align-items:center;gap:10px;padding:9px 12px;
+  border-radius:14px;border:1px solid rgba(255,255,255,.1);
   background:rgba(255,255,255,.05);color:#fff;font-family:inherit;
   cursor:pointer;text-align:left;transition:transform .14s,background .14s;width:100%;}
 .mode-card:active{transform:scale(.97);background:rgba(255,255,255,.09);}
-.mode-icon{font-size:21px;flex:0 0 auto;}
+.mode-icon{font-size:19px;flex:0 0 auto;}
 .mode-text{flex:1;min-width:0;}
-.mode-name{font-size:13.5px;font-weight:800;}
-.mode-desc{font-size:9.5px;color:rgba(255,255,255,.42);margin-top:1px;}
-.mode-progress{font-size:10px;font-weight:800;color:#b9a9ff;
-  background:rgba(124,92,255,.16);padding:4px 9px;border-radius:99px;flex:0 0 auto;}
+.mode-name{font-size:12.5px;font-weight:800;}
+.mode-desc{font-size:9px;color:rgba(255,255,255,.42);margin-top:1px;}
+.mode-progress{font-size:9px;font-weight:800;color:#b9a9ff;
+  background:rgba(124,92,255,.16);padding:4px 8px;border-radius:99px;flex:0 0 auto;}
 
 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-size:15.5px;font-weight:800;
   font-family:inherit;cursor:pointer;transition:transform .14s ease;letter-spacing:.3px;}
@@ -268,6 +268,63 @@ h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
 .match-tile.dropping{animation:matchDrop .24s cubic-bezier(.35,1.5,.6,1);}
 @keyframes matchDrop{from{transform:translateY(-42%);opacity:0;}to{transform:translateY(0);opacity:1;}}
 
+/* ============ slide puzzle ============ */
+.slide-hud{display:flex;gap:8px;margin:10px 0 7px;flex:0 0 auto;}
+.slide-stat{flex:1;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:7px 8px;text-align:center;}
+.slide-stat-label{display:block;font-size:9.5px;color:rgba(255,255,255,.42);
+  font-weight:700;letter-spacing:.5px;margin-bottom:1px;}
+.slide-stat-value{display:block;font-size:16px;font-weight:900;color:#fff;
+  font-variant-numeric:tabular-nums;}
+.slide-wrap{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:0;padding:10px 0;}
+.slide-board{position:relative;
+  width:min(90vw,56vh,450px);height:min(90vw,56vh,450px);
+  background:rgba(255,255,255,.03);border-radius:16px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 40px rgba(0,0,0,.45);
+  touch-action:none;
+  --n:3;--gap:4px;--tile-font:24px;}
+@supports (height:100dvh){.slide-board{width:min(90vw,56dvh,450px);height:min(90vw,56dvh,450px);}}
+.slide-tile{position:absolute;left:0;top:0;
+  width:calc(100% / var(--n));height:calc(100% / var(--n));
+  box-sizing:border-box;
+  padding:var(--gap);
+  transition:transform .15s cubic-bezier(.3,1.3,.5,1);
+  cursor:pointer;
+  will-change:transform;}
+.slide-face{width:100%;height:100%;border-radius:10px;
+  background:linear-gradient(160deg,#7c5cff,#5a3fcc);
+  box-shadow:0 4px 10px rgba(0,0,0,.3),inset 0 -3px 0 rgba(0,0,0,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:var(--tile-font);color:#fff;
+  text-shadow:0 2px 4px rgba(0,0,0,.35);
+  transition:filter .15s,background .15s,box-shadow .15s;}
+.slide-tile.movable .slide-face{
+  background:linear-gradient(160deg,#9d7dff,#7c5cff);
+  box-shadow:0 4px 14px rgba(124,92,255,.5),inset 0 -3px 0 rgba(0,0,0,.2);}
+.slide-tile.bump .slide-face{
+  animation:slideBump .24s;}
+@keyframes slideBump{
+  0%,100%{filter:brightness(1) saturate(1);}
+  50%{filter:brightness(1.9) saturate(1.7) hue-rotate(20deg);}
+}
+
+/* ============ shoot game ============ */
+.shoot-hud{display:flex;gap:8px;margin:10px 0 7px;flex:0 0 auto;}
+.shoot-stat{flex:1;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:7px 8px;text-align:center;}
+.shoot-stat-label{display:block;font-size:9.5px;color:rgba(255,255,255,.42);
+  font-weight:700;letter-spacing:.5px;margin-bottom:1px;}
+.shoot-stat-value{display:block;font-size:16px;font-weight:900;color:#fff;
+  font-variant-numeric:tabular-nums;transition:color .25s;}
+.shoot-stat-value.warn{color:#ff9f43;}
+.shoot-stat-value.danger{color:#ff5c8a;}
+.shoot-wrap{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:0;padding:8px 0;}
+#shootCanvas{display:block;border-radius:18px;background:#0a0a16;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 40px rgba(0,0,0,.5);
+  width:min(90vw,56vh,450px);height:min(90vw,56vh,450px);
+  touch-action:none;cursor:crosshair;}
+@supports (height:100dvh){#shootCanvas{width:min(90vw,56dvh,450px);height:min(90vw,56dvh,450px);}}
+
 /* ============ pinball ============ */
 .pinball-wrap{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:0;padding:8px 0;}
 #pinballCanvas{display:block;border-radius:18px;background:#0a0a16;
@@ -421,6 +478,22 @@ h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
         </div>
         <div class="mode-progress" id="matchProgress">0/300</div>
       </button>
+      <button class="mode-card" id="slideModeBtn">
+        <div class="mode-icon">🔢</div>
+        <div class="mode-text">
+          <div class="mode-name" data-i18n="slideGame"></div>
+          <div class="mode-desc" data-i18n="slideDesc"></div>
+        </div>
+        <div class="mode-progress" id="slideProgress">0/500</div>
+      </button>
+      <button class="mode-card" id="shootModeBtn">
+        <div class="mode-icon">🎯</div>
+        <div class="mode-text">
+          <div class="mode-name" data-i18n="shootGame"></div>
+          <div class="mode-desc" data-i18n="shootDesc"></div>
+        </div>
+        <div class="mode-progress" id="shootProgress">0/300</div>
+      </button>
       <button class="mode-card" id="snakeModeBtn">
         <div class="mode-icon">🐍</div>
         <div class="mode-text">
@@ -430,7 +503,7 @@ h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
         <div class="mode-progress">∞</div>
       </button>
       <button class="mode-card" id="pinballModeBtn">
-        <div class="mode-icon">🎯</div>
+        <div class="mode-icon">🪩</div>
         <div class="mode-text">
           <div class="mode-name" data-i18n="pinballGame"></div>
           <div class="mode-desc" data-i18n="pinballDesc"></div>
@@ -561,6 +634,76 @@ h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
   <div class="levels-grid" id="matchLevelsGrid"></div>
 </section>
 
+<!-- SLIDE PUZZLE GAME -->
+<section id="screen-slide" class="screen">
+  <div class="game-top">
+    <button class="icon-btn" id="slideBack">←</button>
+    <div class="level-chip" id="slideLevelChip">1</div>
+    <button class="icon-btn" id="slideSound">🔊</button>
+  </div>
+  <div class="slide-hud">
+    <div class="slide-stat">
+      <span class="slide-stat-label" data-i18n="movesLabel2"></span>
+      <span class="slide-stat-value" id="slideMoves">0</span>
+    </div>
+    <div class="slide-stat">
+      <span class="slide-stat-label" data-i18n="parLabel"></span>
+      <span class="slide-stat-value" id="slidePar">0</span>
+    </div>
+    <div class="slide-stat">
+      <span class="slide-stat-label" data-i18n="timeLabel"></span>
+      <span class="slide-stat-value" id="slideTime">0:00</span>
+    </div>
+  </div>
+  <div class="slide-wrap"><div class="slide-board" id="slideBoard"></div></div>
+</section>
+
+<!-- SLIDE LEVELS -->
+<section id="screen-slide-levels" class="screen">
+  <div class="game-top">
+    <button class="icon-btn" id="slideLevelsBack">←</button>
+    <div class="level-chip" data-i18n="levelsTitle"></div>
+    <div class="spacer"></div>
+  </div>
+  <button class="btn primary" id="slideContinueBtn" style="flex:0 0 auto;margin-bottom:8px"></button>
+  <div class="levels-grid" id="slideLevelsGrid"></div>
+</section>
+
+<!-- SHOOT GAME -->
+<section id="screen-shoot" class="screen">
+  <div class="game-top">
+    <button class="icon-btn" id="shootBack">←</button>
+    <div class="level-chip" id="shootLevelChip">1</div>
+    <button class="icon-btn" id="shootSound">🔊</button>
+  </div>
+  <div class="shoot-hud">
+    <div class="shoot-stat">
+      <span class="shoot-stat-label" data-i18n="hitsLabel"></span>
+      <span class="shoot-stat-value" id="shootHits">0/3</span>
+    </div>
+    <div class="shoot-stat">
+      <span class="shoot-stat-label" data-i18n="ammoLabel"></span>
+      <span class="shoot-stat-value" id="shootAmmo">9</span>
+    </div>
+    <div class="shoot-stat">
+      <span class="shoot-stat-label" data-i18n="accuracyLabel"></span>
+      <span class="shoot-stat-value" id="shootAcc">100%</span>
+    </div>
+  </div>
+  <div class="shoot-wrap"><canvas id="shootCanvas"></canvas></div>
+</section>
+
+<!-- SHOOT LEVELS -->
+<section id="screen-shoot-levels" class="screen">
+  <div class="game-top">
+    <button class="icon-btn" id="shootLevelsBack">←</button>
+    <div class="level-chip" data-i18n="levelsTitle"></div>
+    <div class="spacer"></div>
+  </div>
+  <button class="btn primary" id="shootContinueBtn" style="flex:0 0 auto;margin-bottom:8px"></button>
+  <div class="levels-grid" id="shootLevelsGrid"></div>
+</section>
+
 <!-- SNAKE MENU -->
 <section id="screen-snake-menu" class="screen">
   <div class="game-top">
@@ -675,9 +818,11 @@ h1#homeTitle{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.15;
    1. i18n
    ========================================================= */
 const T = {
-  zh:{appTitle:'龙龙游戏厅',appSubtitle:'七种玩法，轻松一下',adLabel:'广告',adTagline:'七种玩法 · 轻松一下',skipAd:'跳过 {n}',
+  zh:{appTitle:'龙龙游戏厅',appSubtitle:'九种玩法，轻松一下',adLabel:'广告',adTagline:'九种玩法 · 轻松一下',skipAd:'跳过 {n}',
     colorGame:'色觉挑战',colorDesc:'找出颜色不同的方块',mazeGame:'迷宫探险',mazeDesc:'从起点走到终点',
     sokobanGame:'推方块',sokobanDesc:'把方块推到目标点',matchGame:'消消乐',matchDesc:'三消连击，300 关挑战',
+    slideGame:'数字华容道',slideDesc:'滑动方块，按顺序排好',
+    shootGame:'射击训练',shootDesc:'点击打靶，300 关挑战',
     snakeGame:'贪吃蛇',snakeDesc:'无尽 · 生存 · 不死',pinballGame:'弹珠',pinballDesc:'点击发射弹珠，击中缓冲器',
     relaxGame:'解压小游戏',relaxDesc:'泡泡 · 音效 · 动物 · 语音',relaxTitle:'解压小游戏',relaxBadge:'新',
     restartAll:'从第 1 关重新开始',resetConfirm:'确定要重置全部进度吗？',
@@ -690,13 +835,18 @@ const T = {
     survivalMode:'生存模式',survivalDesc:'障碍物越来越多，挑战极限',immortalMode:'不死模式',immortalDesc:'撞墙会穿过去，怎么玩都不会死',
     gameOver:'游戏结束',scoreNum:'得分：{n}',backToMenu:'返回模式选择',best:'最高分',pinballEnd:'时间到！',
     scoreLabel2:'得分',targetLabel:'目标',movesLabel:'剩余步数',noMoves:'没有可移动的方块，已洗牌',
+    movesLabel2:'步数',parLabel:'参考',timeLabel:'时间',slideMovesResult:'步数 {m} / 参考 {p}',
+    hitsLabel:'命中',ammoLabel:'弹药',accuracyLabel:'精准度',
+    shootClear:'过关！',shootFail:'弹药耗尽',shootResult:'命中 {h} / 射击 {s}',
     tabBubble:'泡泡',tabSound:'音效',tabAnimal:'动物',tabVoice:'语音',bubbleHint:'点一下泡泡，把它们全部戳破',
     soundHint:'点一下听听看',animalHint:'动物叫声大全',voiceHint:'用不同语言说「你好」',
     soundPop:'泡泡',soundDing:'叮',soundWood:'木鱼',soundDrop:'水滴',soundChime:'风铃',soundPluck:'拨弦',soundBoing:'弹跳',soundShaker:'沙锤',
     animalCat:'猫',animalDog:'狗',animalBird:'鸟',animalCow:'牛',animalDuck:'鸭',animalFrog:'青蛙',animalSheep:'羊',animalBee:'蜜蜂'},
-  en:{appTitle:'LongLong Arcade',appSubtitle:'Seven games, endless fun',adLabel:'AD',adTagline:'Seven games · Take it easy',skipAd:'Skip {n}',
+  en:{appTitle:'LongLong Arcade',appSubtitle:'Nine games, endless fun',adLabel:'AD',adTagline:'Nine games · Take it easy',skipAd:'Skip {n}',
     colorGame:'Color Hunt',colorDesc:'Find the tile with a different color',mazeGame:'Maze Escape',mazeDesc:'Reach the goal from the start',
     sokobanGame:'Sokoban',sokobanDesc:'Push blocks onto the goals',matchGame:'Match 3',matchDesc:'Match & combo, 300 levels',
+    slideGame:'Sliding Puzzle',slideDesc:'Slide tiles into order',
+    shootGame:'Shooting Range',shootDesc:'Tap to shoot, 300 levels',
     snakeGame:'Snake',snakeDesc:'Endless · Survival · Immortal',pinballGame:'Pinball',pinballDesc:'Tap to launch, hit the bumpers',
     relaxGame:'Relax Zone',relaxDesc:'Bubbles · Sounds · Animals · Voices',relaxTitle:'Relax Zone',relaxBadge:'New',
     restartAll:'Restart from Level 1',resetConfirm:'Reset all progress?',
@@ -709,13 +859,18 @@ const T = {
     survivalMode:'Survival',survivalDesc:'Obstacles keep spawning, push your limits',immortalMode:'Immortal',immortalDesc:'Walls wrap around, you can never die',
     gameOver:'Game Over',scoreNum:'Score: {n}',backToMenu:'Back to Modes',best:'Best',pinballEnd:"Time's Up!",
     scoreLabel2:'Score',targetLabel:'Target',movesLabel:'Moves',noMoves:'No moves left, reshuffled',
+    movesLabel2:'Moves',parLabel:'Par',timeLabel:'Time',slideMovesResult:'Moves {m} / Par {p}',
+    hitsLabel:'Hits',ammoLabel:'Ammo',accuracyLabel:'Accuracy',
+    shootClear:'Cleared!',shootFail:'Out of Ammo',shootResult:'Hit {h} / Fired {s}',
     tabBubble:'Bubbles',tabSound:'Sounds',tabAnimal:'Animals',tabVoice:'Voices',bubbleHint:'Tap the bubbles to pop them all',
     soundHint:'Tap to hear the sound',animalHint:'Animal sound collection',voiceHint:'Say "hello" in different languages',
     soundPop:'Pop',soundDing:'Ding',soundWood:'Wood',soundDrop:'Drop',soundChime:'Chime',soundPluck:'Pluck',soundBoing:'Boing',soundShaker:'Shaker',
     animalCat:'Cat',animalDog:'Dog',animalBird:'Bird',animalCow:'Cow',animalDuck:'Duck',animalFrog:'Frog',animalSheep:'Sheep',animalBee:'Bee'},
-  ja:{appTitle:'ロンロンゲームセンター',appSubtitle:'7つのゲームで気軽に遊ぼう',adLabel:'広告',adTagline:'7つのゲーム · リラックス',skipAd:'スキップ {n}',
+  ja:{appTitle:'ロンロンゲームセンター',appSubtitle:'9つのゲームで気軽に遊ぼう',adLabel:'広告',adTagline:'9つのゲーム · リラックス',skipAd:'スキップ {n}',
     colorGame:'色覚チャレンジ',colorDesc:'違う色のタイルを探そう',mazeGame:'迷宮アドベンチャー',mazeDesc:'スタートからゴールへ',
     sokobanGame:'倉庫番',sokobanDesc:'ブロックをゴールへ押そう',matchGame:'マッチ3',matchDesc:'3つ消し、300ステージ',
+    slideGame:'スライドパズル',slideDesc:'タイルをスライドして並べよう',
+    shootGame:'シューティング',shootDesc:'タップして射撃、300ステージ',
     snakeGame:'スネーク',snakeDesc:'エンドレス · サバイバル · 不死',pinballGame:'ピンボール',pinballDesc:'タップで発射、バンパーを狙え',
     relaxGame:'リラックス',relaxDesc:'バブル · 効果音 · 動物 · 音声',relaxTitle:'リラックス',relaxBadge:'新',
     restartAll:'レベル1からやり直す',resetConfirm:'すべての進行状況をリセットしますか？',
@@ -728,13 +883,18 @@ const T = {
     survivalMode:'サバイバル',survivalDesc:'障害物が増え続ける、限界に挑戦',immortalMode:'不死モード',immortalDesc:'壁をすり抜ける、絶対に死なない',
     gameOver:'ゲームオーバー',scoreNum:'スコア：{n}',backToMenu:'モード選択へ',best:'ベスト',pinballEnd:'時間切れ！',
     scoreLabel2:'スコア',targetLabel:'目標',movesLabel:'残り手数',noMoves:'動かせる手がなく、シャッフルしました',
+    movesLabel2:'手数',parLabel:'目安',timeLabel:'時間',slideMovesResult:'手数 {m} / 目安 {p}',
+    hitsLabel:'命中',ammoLabel:'弾薬',accuracyLabel:'精度',
+    shootClear:'クリア！',shootFail:'弾切れ',shootResult:'命中 {h} / 発射 {s}',
     tabBubble:'バブル',tabSound:'効果音',tabAnimal:'動物',tabVoice:'音声',bubbleHint:'バブルをタップして全部割ろう',
     soundHint:'タップして音を聞いてみよう',animalHint:'動物の鳴き声全集',voiceHint:'いろんな言語で「こんにちは」',
     soundPop:'ポップ',soundDing:'チン',soundWood:'木魚',soundDrop:'水滴',soundChime:'風鈴',soundPluck:'はじく',soundBoing:'跳ねる',soundShaker:'シェイカー',
     animalCat:'猫',animalDog:'犬',animalBird:'鳥',animalCow:'牛',animalDuck:'アヒル',animalFrog:'カエル',animalSheep:'羊',animalBee:'蜂'},
-  ko:{appTitle:'룽룽 게임센터',appSubtitle:'일곱 가지 게임으로 가볍게 즐기기',adLabel:'광고',adTagline:'일곱 가지 게임 · 편하게 즐기기',skipAd:'건너뛰기 {n}',
+  ko:{appTitle:'룽룽 게임센터',appSubtitle:'아홉 가지 게임으로 가볍게 즐기기',adLabel:'광고',adTagline:'아홉 가지 게임 · 편하게 즐기기',skipAd:'건너뛰기 {n}',
     colorGame:'색감 챌린지',colorDesc:'다른 색 타일을 찾아라',mazeGame:'미로 탈출',mazeDesc:'시작에서 목표까지',
     sokobanGame:'소코반',sokobanDesc:'블록을 목표 지점으로 밀기',matchGame:'매치 3',matchDesc:'3개 맞추기, 300 레벨',
+    slideGame:'슬라이딩 퍼즐',slideDesc:'타일을 밀어서 순서대로 맞추기',
+    shootGame:'사격 훈련',shootDesc:'탭해서 사격, 300 레벨',
     snakeGame:'스네이크',snakeDesc:'엔들리스 · 서바이벌 · 불사',pinballGame:'핀볼',pinballDesc:'탭해서 발사, 범퍼를 맞춰라',
     relaxGame:'힐링 존',relaxDesc:'버블 · 효과음 · 동물 · 음성',relaxTitle:'힐링 존',relaxBadge:'신규',
     restartAll:'레벨 1부터 다시 시작',resetConfirm:'모든 진행 상황을 초기화할까요?',
@@ -747,6 +907,9 @@ const T = {
     survivalMode:'서바이벌',survivalDesc:'장애물이 계속 등장, 한계에 도전',immortalMode:'불사 모드',immortalDesc:'벽을 통과해도 죽지 않아요',
     gameOver:'게임 오버',scoreNum:'점수: {n}',backToMenu:'모드 선택으로',best:'최고',pinballEnd:'시간 초과!',
     scoreLabel2:'점수',targetLabel:'목표',movesLabel:'남은 이동',noMoves:'이동할 수 있는 수가 없어 섞었습니다',
+    movesLabel2:'이동',parLabel:'기준',timeLabel:'시간',slideMovesResult:'이동 {m} / 기준 {p}',
+    hitsLabel:'명중',ammoLabel:'탄약',accuracyLabel:'정확도',
+    shootClear:'클리어!',shootFail:'탄약 소진',shootResult:'명중 {h} / 발사 {s}',
     tabBubble:'버블',tabSound:'효과음',tabAnimal:'동물',tabVoice:'음성',bubbleHint:'버블을 탭해서 모두 터뜨리세요',
     soundHint:'탭해서 소리를 들어보세요',animalHint:'동물 소리 모음',voiceHint:'여러 언어로 "안녕하세요"',
     soundPop:'버블',soundDing:'딩',soundWood:'목탁',soundDrop:'물방울',soundChime:'풍경',soundPluck:'피크',soundBoing:'튕기기',soundShaker:'셰이커',
@@ -755,8 +918,8 @@ const T = {
 
 const LANGS = ['zh','en','ja','ko'];
 const LANG_LABELS = { zh:'中文', en:'EN', ja:'日本語', ko:'한국어' };
-const COLOR_TOTAL = 170, MAZE_TOTAL = 120, SOKOBAN_TOTAL = 150, MATCH_TOTAL = 300;
-const SAVE_KEY = 'longlong.arcade.v6';
+const COLOR_TOTAL = 170, MAZE_TOTAL = 120, SOKOBAN_TOTAL = 150, MATCH_TOTAL = 300, SLIDE_TOTAL = 500, SHOOT_TOTAL = 300;
+const SAVE_KEY = 'longlong.arcade.v8';
 
 const state = {
   lang:'zh', sound:true,
@@ -764,6 +927,8 @@ const state = {
   maze:{ unlocked:1, score:0 },
   sokoban:{ unlocked:1, score:0 },
   match:{ unlocked:1, score:0 },
+  slide:{ unlocked:1, score:0 },
+  shoot:{ unlocked:1, score:0 },
   snake:{ bestEndless:0, bestSurvival:0, bestImmortal:0 },
   pinball:{ best:0 }
 };
@@ -788,6 +953,8 @@ function load(){
     if (d.maze){ state.maze.unlocked = clamp(d.maze.unlocked|0||1,1,MAZE_TOTAL); state.maze.score = d.maze.score|0||0; }
     if (d.sokoban){ state.sokoban.unlocked = clamp(d.sokoban.unlocked|0||1,1,SOKOBAN_TOTAL); state.sokoban.score = d.sokoban.score|0||0; }
     if (d.match){ state.match.unlocked = clamp(d.match.unlocked|0||1,1,MATCH_TOTAL); state.match.score = d.match.score|0||0; }
+    if (d.slide){ state.slide.unlocked = clamp(d.slide.unlocked|0||1,1,SLIDE_TOTAL); state.slide.score = d.slide.score|0||0; }
+    if (d.shoot){ state.shoot.unlocked = clamp(d.shoot.unlocked|0||1,1,SHOOT_TOTAL); state.shoot.score = d.shoot.score|0||0; }
     if (d.snake){
       state.snake.bestEndless = d.snake.bestEndless|0||0;
       state.snake.bestSurvival = d.snake.bestSurvival|0||0;
@@ -803,6 +970,8 @@ function save(){
     maze:{unlocked:state.maze.unlocked,score:state.maze.score},
     sokoban:{unlocked:state.sokoban.unlocked,score:state.sokoban.score},
     match:{unlocked:state.match.unlocked,score:state.match.score},
+    slide:{unlocked:state.slide.unlocked,score:state.slide.score},
+    shoot:{unlocked:state.shoot.unlocked,score:state.shoot.score},
     snake:{bestEndless:state.snake.bestEndless,bestSurvival:state.snake.bestSurvival,bestImmortal:state.snake.bestImmortal},
     pinball:{best:state.pinball.best}
   }));}catch(e){}
@@ -923,6 +1092,8 @@ function updateHome(){
   $('#mazeProgress').textContent = Math.min(state.maze.unlocked-1, MAZE_TOTAL) + '/' + MAZE_TOTAL;
   $('#sokobanProgress').textContent = Math.min(state.sokoban.unlocked-1, SOKOBAN_TOTAL) + '/' + SOKOBAN_TOTAL;
   $('#matchProgress').textContent = Math.min(state.match.unlocked-1, MATCH_TOTAL) + '/' + MATCH_TOTAL;
+  $('#slideProgress').textContent = Math.min(state.slide.unlocked-1, SLIDE_TOTAL) + '/' + SLIDE_TOTAL;
+  $('#shootProgress').textContent = Math.min(state.shoot.unlocked-1, SHOOT_TOTAL) + '/' + SHOOT_TOTAL;
   $('#pinballProgress').textContent = state.pinball.best || 0;
 
   const cn = Math.min(state.color.unlocked, COLOR_TOTAL);
@@ -933,6 +1104,10 @@ function updateHome(){
   $('#sokobanContinueBtn').textContent = state.sokoban.unlocked > 1 ? t('continuePlay', {n: sn}) : t('play');
   const tc = Math.min(state.match.unlocked, MATCH_TOTAL);
   $('#matchContinueBtn').textContent = state.match.unlocked > 1 ? t('continuePlay', {n: tc}) : t('play');
+  const sln = Math.min(state.slide.unlocked, SLIDE_TOTAL);
+  $('#slideContinueBtn').textContent = state.slide.unlocked > 1 ? t('continuePlay', {n: sln}) : t('play');
+  const shn = Math.min(state.shoot.unlocked, SHOOT_TOTAL);
+  $('#shootContinueBtn').textContent = state.shoot.unlocked > 1 ? t('continuePlay', {n: shn}) : t('play');
 
   $('#endlessBest').textContent = t('best') + ': ' + (state.snake.bestEndless || 0);
   $('#survivalBest').textContent = t('best') + ': ' + (state.snake.bestSurvival || 0);
@@ -964,12 +1139,22 @@ function applyLang(){
     $('#matchLevelChip').textContent = t('levelN', {n: matchState.level});
     updateMatchHUD();
   }
+  if ($('#screen-slide').classList.contains('active') && slideState.active){
+    $('#slideLevelChip').textContent = t('levelN', {n: slideState.level});
+    updateSlideHUD();
+  }
+  if ($('#screen-shoot').classList.contains('active') && shootState.active){
+    $('#shootLevelChip').textContent = t('levelN', {n: shootState.level});
+    updateShootHUD();
+  }
   if ($('#screen-snake').classList.contains('active') && snakeState.running) updateSnakeStat();
   if ($('#screen-pinball').classList.contains('active') && pinballState.active) updatePinballHUD();
   if ($('#screen-color-levels').classList.contains('active')) buildColorLevels();
   if ($('#screen-maze-levels').classList.contains('active')) buildMazeLevels();
   if ($('#screen-sokoban-levels').classList.contains('active')) buildSokobanLevels();
   if ($('#screen-match-levels').classList.contains('active')) buildMatchLevels();
+  if ($('#screen-slide-levels').classList.contains('active')) buildSlideLevels();
+  if ($('#screen-shoot-levels').classList.contains('active')) buildShootLevels();
 }
 $('#langBtn').addEventListener('click', function(){
   const i = LANGS.indexOf(state.lang);
@@ -1516,7 +1701,7 @@ function startSokobanLevel(level){
 }
 
 /* =========================================================
-   9. MATCH 3（消消乐，300 关，无时间限制，步数目标制）
+   9. MATCH 3
    ========================================================= */
 const MATCH_EMOJI = ['🍎','🍋','🍇','🥝','🫐','🍊','🍓'];
 const MATCH_COLORS = [
@@ -1528,13 +1713,11 @@ const MATCH_COLORS = [
   'linear-gradient(160deg,#ffa94d,#e8590c)',
   'linear-gradient(160deg,#f783ac,#c2255c)'
 ];
-
 const matchState = {
   level:1, grid:6, types:4, moves:22, target:312,
   score:0, board:[], cellEls:[],
   selected:null, busy:false, active:false, combo:0
 };
-
 function getMatchConfig(level){
   let grid, types, moves;
   if (level <= 30)       { grid = 6; types = 4; moves = 22; }
@@ -1547,7 +1730,6 @@ function getMatchConfig(level){
   const target = 300 + level * 12;
   return { grid, types, moves, target };
 }
-
 function createMatchBoard(grid, types){
   const board = [];
   for (let r=0; r<grid; r++){
@@ -1567,10 +1749,8 @@ function createMatchBoard(grid, types){
   }
   return board;
 }
-
 function findMatchTiles(board, grid){
   const matched = new Set();
-  // 横向
   for (let r=0; r<grid; r++){
     let c = 0;
     while (c < grid){
@@ -1582,7 +1762,6 @@ function findMatchTiles(board, grid){
       c = end;
     }
   }
-  // 纵向
   for (let c=0; c<grid; c++){
     let r = 0;
     while (r < grid){
@@ -1596,7 +1775,6 @@ function findMatchTiles(board, grid){
   }
   return Array.from(matched);
 }
-
 function matchHasMoves(board, grid){
   const swapCheck = function(r1,c1,r2,c2){
     const tmp = board[r1][c1];
@@ -1616,7 +1794,6 @@ function matchHasMoves(board, grid){
   }
   return false;
 }
-
 function matchApplyGravity(board, grid, types){
   for (let c=0; c<grid; c++){
     let writeRow = grid - 1;
@@ -1634,7 +1811,6 @@ function matchApplyGravity(board, grid, types){
     }
   }
 }
-
 function buildMatchBoardDom(){
   const grid = matchState.grid;
   const boardEl = $('#matchBoard');
@@ -1663,7 +1839,6 @@ function buildMatchBoardDom(){
     boardEl.style.setProperty('--tile-font', Math.round(cellSize * 0.58) + 'px');
   });
 }
-
 function renderMatchBoard(){
   const grid = matchState.grid;
   const board = matchState.board;
@@ -1693,7 +1868,6 @@ function renderMatchBoard(){
     }
   }
 }
-
 function updateMatchHUD(){
   const s = matchState.score;
   const target = matchState.target;
@@ -1705,7 +1879,6 @@ function updateMatchHUD(){
   if (moves <= 3) movesEl.className = 'match-stat-value danger';
   else if (moves <= 7) movesEl.className = 'match-stat-value warn';
   else movesEl.className = 'match-stat-value';
-
   const p = clamp(s / target, 0, 1);
   const bar = $('#matchProgressBar');
   bar.style.width = (p * 100) + '%';
@@ -1713,14 +1886,12 @@ function updateMatchHUD(){
   else if (p >= 0.4) bar.style.background = 'linear-gradient(90deg,#ffd166,#7c5cff)';
   else bar.style.background = 'linear-gradient(90deg,#7c5cff,#2ee6a8)';
 }
-
 async function resolveMatchCascade(){
   let chain = 0;
   while (true){
     const matched = findMatchTiles(matchState.board, matchState.grid);
     if (!matched.length) break;
     chain++;
-    // 消除动画
     for (const idx of matched){
       const r = Math.floor(idx / matchState.grid);
       const c = idx % matchState.grid;
@@ -1730,10 +1901,8 @@ async function resolveMatchCascade(){
     beep(560 + chain * 80, 0.07, 'sine', 0.06);
     vibrate(chain > 1 ? 12 : 6);
     await sleep(240);
-    // 计分
     const gained = matched.length * 10 * chain;
     matchState.score += gained;
-    // 从棋盘移除
     for (const idx of matched){
       const r = Math.floor(idx / matchState.grid);
       const c = idx % matchState.grid;
@@ -1747,13 +1916,11 @@ async function resolveMatchCascade(){
   if (chain >= 2) matchState.combo = chain;
   return chain;
 }
-
 function matchSwapTiles(r1, c1, r2, c2){
   const tmp = matchState.board[r1][c1];
   matchState.board[r1][c1] = matchState.board[r2][c2];
   matchState.board[r2][c2] = tmp;
 }
-
 function updateMatchSelection(){
   document.querySelectorAll('.match-tile.selected').forEach(el => el.classList.remove('selected'));
   const sel = matchState.selected;
@@ -1762,18 +1929,14 @@ function updateMatchSelection(){
     if (el) el.classList.add('selected');
   }
 }
-
 async function matchTrySwap(r1, c1, r2, c2){
   if (matchState.busy || !matchState.active) return;
   matchState.busy = true;
-
   matchSwapTiles(r1, c1, r2, c2);
   renderMatchBoard();
   await sleep(130);
-
   const matched = findMatchTiles(matchState.board, matchState.grid);
   if (!matched.length){
-    // 交换回去
     matchSwapTiles(r1, c1, r2, c2);
     renderMatchBoard();
     beep(180, 0.08, 'square', 0.04);
@@ -1781,14 +1944,10 @@ async function matchTrySwap(r1, c1, r2, c2){
     matchState.busy = false;
     return;
   }
-
   matchState.moves--;
   updateMatchHUD();
   await resolveMatchCascade();
-
-  // 检查是否还有可行移动，没有则洗牌
   if (!matchHasMoves(matchState.board, matchState.grid)){
-    // 简单洗牌：重新生成直到有可移动
     for (let i=0; i<50; i++){
       matchState.board = createMatchBoard(matchState.grid, matchState.types);
       if (matchHasMoves(matchState.board, matchState.grid)) break;
@@ -1796,8 +1955,6 @@ async function matchTrySwap(r1, c1, r2, c2){
     renderMatchBoard();
     beep(420, 0.12, 'sine', 0.05);
   }
-
-  // 胜负检查
   if (matchState.score >= matchState.target){
     matchWin();
   } else if (matchState.moves <= 0){
@@ -1805,11 +1962,9 @@ async function matchTrySwap(r1, c1, r2, c2){
   }
   matchState.busy = false;
 }
-
 function onMatchTileTap(r, c){
   if (matchState.busy || !matchState.active) return;
   if (!matchState.board[r][c]) return;
-
   const sel = matchState.selected;
   if (!sel){
     matchState.selected = { r, c };
@@ -1834,7 +1989,6 @@ function onMatchTileTap(r, c){
     beep(520, 0.04, 'sine', 0.035);
   }
 }
-
 function matchWin(){
   matchState.active = false;
   const remainRatio = matchState.moves / getMatchConfig(matchState.level).moves;
@@ -1858,7 +2012,6 @@ function matchWin(){
     secondary: { label: t('retry'), fn: function(){ closeOverlay(); startMatchLevel(matchState.level); } }
   });
 }
-
 function matchLose(){
   matchState.active = false;
   beep(220, 0.18, 'sawtooth', 0.055);
@@ -1872,7 +2025,6 @@ function matchLose(){
     secondary: { label: t('levelsTitle'), fn: function(){ closeOverlay(); openMatchLevels(); } }
   });
 }
-
 function startMatchLevel(level){
   const cfg = getMatchConfig(level);
   matchState.level = level;
@@ -1884,7 +2036,6 @@ function startMatchLevel(level){
   matchState.selected = null;
   matchState.busy = false;
   matchState.combo = 0;
-  // 生成确保无初始匹配，且有可移动
   let board = createMatchBoard(cfg.grid, cfg.types);
   for (let i=0; i<30; i++){
     if (matchHasMoves(board, cfg.grid)) break;
@@ -1892,7 +2043,6 @@ function startMatchLevel(level){
   }
   matchState.board = board;
   matchState.active = true;
-
   showScreen('match');
   $('#matchLevelChip').textContent = t('levelN', {n: level});
   buildMatchBoardDom();
@@ -1901,7 +2051,791 @@ function startMatchLevel(level){
 }
 
 /* =========================================================
-   10. SNAKE
+   10. SLIDE PUZZLE
+   ========================================================= */
+const slideState = {
+  level: 1, size: 3,
+  board: [], blank: 0,
+  moves: 0, par: 0,
+  active: false, solved: false,
+  tileEls: [],
+  timerId: null, startTime: 0,
+  hudMovesCache: null, hudParCache: null, hudTimeCache: ''
+};
+function getSlideConfig(level){
+  if (level <= 120){
+    return { size: 3, scramble: Math.round(6 + (level - 1) / 119 * 34) };
+  } else if (level <= 400){
+    return { size: 4, scramble: Math.round(20 + (level - 121) / 279 * 80) };
+  } else {
+    return { size: 5, scramble: Math.round(40 + (level - 401) / 99 * 120) };
+  }
+}
+function slideNeighbors(idx, size){
+  const r = Math.floor(idx / size);
+  const c = idx % size;
+  const res = [];
+  if (r > 0) res.push(idx - size);
+  if (r < size - 1) res.push(idx + size);
+  if (c > 0) res.push(idx - 1);
+  if (c < size - 1) res.push(idx + 1);
+  return res;
+}
+function slideScramble(size, steps){
+  const N = size * size;
+  const board = [];
+  for (let i = 1; i < N; i++) board.push(i);
+  board.push(0);
+  let blank = N - 1;
+  let last = -1;
+  for (let i = 0; i < steps; i++){
+    const nb = slideNeighbors(blank, size).filter(n => n !== last);
+    if (!nb.length) continue;
+    const pick = nb[randInt(0, nb.length - 1)];
+    board[blank] = board[pick];
+    board[pick] = 0;
+    last = blank;
+    blank = pick;
+  }
+  return { board, blank };
+}
+function renderSlide(){
+  const size = slideState.size;
+  const board = slideState.board;
+  const boardEl = $('#slideBoard');
+  const needRebuild = slideState.tileEls.length !== size * size - 1;
+  if (needRebuild){
+    boardEl.innerHTML = '';
+    slideState.tileEls = [];
+    for (let v = 1; v < size * size; v++){
+      const el = document.createElement('div');
+      el.className = 'slide-tile';
+      el.dataset.value = v;
+      const face = document.createElement('div');
+      face.className = 'slide-face';
+      face.textContent = v;
+      el.appendChild(face);
+      el.addEventListener('pointerdown', onSlideTileTap);
+      boardEl.appendChild(el);
+      slideState.tileEls[v - 1] = el;
+    }
+    boardEl.style.setProperty('--n', size);
+    const gapSize = size === 3 ? 5 : size === 4 ? 4 : 3;
+    boardEl.style.setProperty('--gap', gapSize + 'px');
+    requestAnimationFrame(function(){
+      const w = boardEl.clientWidth;
+      if (!w) return;
+      const cellSize = w / size;
+      boardEl.style.setProperty('--tile-font', Math.round(cellSize * 0.38) + 'px');
+    });
+  }
+  const movable = new Set(slideNeighbors(slideState.blank, size));
+  for (let i = 0; i < size * size; i++){
+    const v = board[i];
+    if (v === 0) continue;
+    const el = slideState.tileEls[v - 1];
+    const r = Math.floor(i / size);
+    const c = i % size;
+    el.style.transform = 'translate(' + (c * 100) + '%,' + (r * 100) + '%)';
+    el.classList.toggle('movable', movable.has(i));
+  }
+}
+function onSlideTileTap(e){
+  if (!slideState.active || slideState.solved) return;
+  const el = e.currentTarget;
+  const v = +el.dataset.value;
+  const idx = slideState.board.indexOf(v);
+  if (idx < 0) return;
+  const nb = slideNeighbors(slideState.blank, slideState.size);
+  if (nb.indexOf(idx) < 0){
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+    setTimeout(function(){ el.classList.remove('bump'); }, 240);
+    beep(180, 0.05, 'square', 0.03);
+    return;
+  }
+  slideState.board[slideState.blank] = v;
+  slideState.board[idx] = 0;
+  slideState.blank = idx;
+  slideState.moves++;
+  beep(560, 0.04, 'sine', 0.04);
+  vibrate(5);
+  updateSlideHUD();
+  renderSlide();
+  if (isSlideSolved()) winSlide();
+}
+function isSlideSolved(){
+  const board = slideState.board;
+  const N = slideState.size * slideState.size;
+  for (let i = 0; i < N - 1; i++){
+    if (board[i] !== i + 1) return false;
+  }
+  return board[N - 1] === 0;
+}
+function updateSlideHUD(){
+  const m = String(slideState.moves);
+  if (m !== slideState.hudMovesCache){
+    $('#slideMoves').textContent = m;
+    slideState.hudMovesCache = m;
+  }
+  const p = String(slideState.par);
+  if (p !== slideState.hudParCache){
+    $('#slidePar').textContent = p;
+    slideState.hudParCache = p;
+  }
+}
+function startSlideLevel(level){
+  const cfg = getSlideConfig(level);
+  slideState.level = level;
+  slideState.size = cfg.size;
+  slideState.par = cfg.scramble;
+  const sc = slideScramble(cfg.size, cfg.scramble);
+  slideState.board = sc.board;
+  slideState.blank = sc.blank;
+  slideState.moves = 0;
+  slideState.active = true;
+  slideState.solved = false;
+  slideState.hudMovesCache = null;
+  slideState.hudParCache = null;
+  slideState.hudTimeCache = '';
+  slideState.tileEls = [];
+
+  showScreen('slide');
+  $('#slideLevelChip').textContent = t('levelN', {n: level});
+  renderSlide();
+  updateSlideHUD();
+  $('#slideTime').textContent = '0:00';
+
+  clearInterval(slideState.timerId);
+  slideState.startTime = Date.now();
+  slideState.timerId = setInterval(function(){
+    if (!slideState.active) return;
+    const elapsed = Math.floor((Date.now() - slideState.startTime) / 1000);
+    const m = Math.floor(elapsed / 60);
+    const s = elapsed % 60;
+    const str = m + ':' + (s < 10 ? '0' : '') + s;
+    if (str !== slideState.hudTimeCache){
+      $('#slideTime').textContent = str;
+      slideState.hudTimeCache = str;
+    }
+  }, 250);
+}
+function winSlide(){
+  slideState.active = false;
+  slideState.solved = true;
+  clearInterval(slideState.timerId);
+  slideState.timerId = null;
+
+  const elapsed = Math.floor((Date.now() - slideState.startTime) / 1000);
+  const ratio = slideState.moves / Math.max(1, slideState.par);
+  const stars = ratio <= 1.4 ? 3 : ratio <= 2.2 ? 2 : 1;
+  const gained = 50 + stars * 40 + Math.max(0, 120 - Math.floor(elapsed / 2));
+
+  state.slide.score += gained;
+  state.slide.unlocked = Math.max(state.slide.unlocked, Math.min(SLIDE_TOTAL, slideState.level + 1));
+  save();
+  updateHome();
+
+  beep(880, 0.09, 'sine', 0.08);
+  setTimeout(function(){ beep(1175, 0.1, 'sine', 0.075); }, 90);
+  setTimeout(function(){ beep(1568, 0.16, 'sine', 0.07); }, 185);
+  vibrate(20);
+
+  const isFinal = slideState.level >= SLIDE_TOTAL;
+  const title = isFinal ? t('allClear') : stars === 3 ? t('perfect') : stars === 2 ? t('great') : t('good');
+  const movesText = t('slideMovesResult', {m: slideState.moves, p: slideState.par});
+
+  openOverlay({
+    icon: stars === 3 ? '🌟' : isFinal ? '🏆' : '🎉',
+    title: title,
+    sub: movesText + ' · +' + gained,
+    stars: stars,
+    enterToNext: !isFinal,
+    primary: isFinal
+      ? { label: t('levelsTitle'), fn: function(){ closeOverlay(); openSlideLevels(); } }
+      : { label: t('next'), fn: function(){ closeOverlay(); startSlideLevel(slideState.level + 1); } },
+    secondary: { label: t('retry'), fn: function(){ closeOverlay(); startSlideLevel(slideState.level); } }
+  });
+}
+
+/* =========================================================
+   11. SHOOT GAME (射击训练, 300关)
+   ========================================================= */
+const SHOOT_SIZE = 400; // 逻辑尺寸 400x400
+const shootState = {
+  canvas:null, ctx:null, dpr:1,
+  level:1,
+  targets:[],
+  particles:[],
+  shockwaves:[],
+  bulletHoles:[],
+  shotsLeft:0,
+  targetCount:0,
+  hits:0,
+  shotsFired:0,
+  active:false,
+  aimX:-999, aimY:-999,
+  showAim:false,
+  lastTs:0,
+  rafId:null,
+  shake:0,
+  flash:0,
+  bgCanvas:null,
+  stars:null,
+  lastShotTime:0
+};
+
+function getShootConfig(level){
+  const t01 = Math.min(1, (level - 1) / 299);
+  const targetCount = Math.min(10, 3 + Math.floor(level / 35));
+  const radius = 44 - t01 * 22;              // 44 → 22
+  const speed = 30 + t01 * 140;              // 30 → 170
+  const extraAmmo = Math.max(2, Math.round(6 - t01 * 4));
+  return {
+    targetCount: targetCount,
+    radius: radius,
+    speed: speed,
+    ammo: targetCount + extraAmmo
+  };
+}
+
+function generateShootStars(){
+  shootState.stars = [];
+  for (let i = 0; i < 70; i++){
+    shootState.stars.push({
+      x: Math.random() * SHOOT_SIZE,
+      y: Math.random() * SHOOT_SIZE,
+      r: Math.random() * 1.4 + 0.3,
+      a: Math.random() * 0.4 + 0.15
+    });
+  }
+}
+
+function renderShootBg(){
+  const w = 800, h = 800;
+  if (!shootState.bgCanvas){
+    shootState.bgCanvas = document.createElement('canvas');
+  }
+  const bg = shootState.bgCanvas;
+  bg.width = w; bg.height = h;
+  const c = bg.getContext('2d');
+  c.setTransform(2, 0, 0, 2, 0, 0);
+  // 深空背景
+  c.fillStyle = '#080812';
+  c.fillRect(0, 0, SHOOT_SIZE, SHOOT_SIZE);
+  const grad = c.createRadialGradient(SHOOT_SIZE*0.5, SHOOT_SIZE*0.4, 0, SHOOT_SIZE*0.5, SHOOT_SIZE*0.4, SHOOT_SIZE*0.75);
+  grad.addColorStop(0, 'rgba(80, 60, 180, 0.22)');
+  grad.addColorStop(0.55, 'rgba(20, 20, 60, 0.08)');
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  c.fillStyle = grad;
+  c.fillRect(0, 0, SHOOT_SIZE, SHOOT_SIZE);
+  // 星星
+  for (const s of shootState.stars){
+    c.fillStyle = 'rgba(255, 255, 255, ' + s.a + ')';
+    c.beginPath();
+    c.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    c.fill();
+  }
+  // 淡网格
+  c.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+  c.lineWidth = 0.6;
+  const step = 40;
+  for (let x = step; x < SHOOT_SIZE; x += step){
+    c.beginPath(); c.moveTo(x, 0); c.lineTo(x, SHOOT_SIZE); c.stroke();
+  }
+  for (let y = step; y < SHOOT_SIZE; y += step){
+    c.beginPath(); c.moveTo(0, y); c.lineTo(SHOOT_SIZE, y); c.stroke();
+  }
+}
+
+function initShootCanvas(){
+  const c = $('#shootCanvas');
+  shootState.canvas = c;
+  shootState.ctx = c.getContext('2d', { alpha:false });
+  c.width = 800;
+  c.height = 800;
+  shootState.ctx.setTransform(2, 0, 0, 2, 0, 0);
+  if (!shootState.stars) generateShootStars();
+  renderShootBg();
+}
+
+function spawnShootTarget(cfg){
+  const r = cfg.radius;
+  let x = 0, y = 0;
+  let attempts = 0;
+  const maxAttempts = 60;
+  while (attempts < maxAttempts){
+    attempts++;
+    x = r + 12 + Math.random() * (SHOOT_SIZE - 2 * r - 24);
+    y = r + 12 + Math.random() * (SHOOT_SIZE - 2 * r - 24);
+    let ok = true;
+    for (const t of shootState.targets){
+      const dx = t.x - x, dy = t.y - y;
+      if (Math.hypot(dx, dy) < t.r + r + 14){ ok = false; break; }
+    }
+    if (ok) break;
+  }
+  const angle = Math.random() * Math.PI * 2;
+  const speed = cfg.speed * (0.7 + Math.random() * 0.7);
+  shootState.targets.push({
+    x: x, y: y,
+    vx: Math.cos(angle) * speed,
+    vy: Math.sin(angle) * speed,
+    r: r,
+    hue: Math.floor(Math.random() * 360),
+    wobble: Math.random() * Math.PI * 2,
+    age: 0
+  });
+}
+
+function startShootLevel(level){
+  const cfg = getShootConfig(level);
+  shootState.level = level;
+  shootState.targets = [];
+  shootState.particles = [];
+  shootState.shockwaves = [];
+  shootState.bulletHoles = [];
+  shootState.shotsLeft = cfg.ammo;
+  shootState.targetCount = cfg.targetCount;
+  shootState.hits = 0;
+  shootState.shotsFired = 0;
+  shootState.active = true;
+  shootState.aimX = -999;
+  shootState.aimY = -999;
+  shootState.showAim = false;
+  shootState.shake = 0;
+  shootState.flash = 0;
+  shootState.lastShotTime = 0;
+
+  for (let i = 0; i < cfg.targetCount; i++){
+    spawnShootTarget(cfg);
+  }
+
+  showScreen('shoot');
+  $('#shootLevelChip').textContent = t('levelN', {n: level});
+  initShootCanvas();
+  updateShootHUD();
+
+  if (shootState.rafId) cancelAnimationFrame(shootState.rafId);
+  shootState.lastTs = 0;
+  shootState.rafId = requestAnimationFrame(shootLoop);
+}
+
+function updateShootHUD(){
+  $('#shootHits').textContent = shootState.hits + '/' + shootState.targetCount;
+  const ammoEl = $('#shootAmmo');
+  ammoEl.textContent = shootState.shotsLeft;
+  if (shootState.shotsLeft <= 2) ammoEl.className = 'shoot-stat-value danger';
+  else if (shootState.shotsLeft <= 4) ammoEl.className = 'shoot-stat-value warn';
+  else ammoEl.className = 'shoot-stat-value';
+
+  let acc = 100;
+  if (shootState.shotsFired > 0){
+    acc = Math.round(shootState.hits / shootState.shotsFired * 100);
+  }
+  $('#shootAcc').textContent = acc + '%';
+}
+
+function shootLoop(ts){
+  if (!shootState.active) return;
+  if (!shootState.lastTs) shootState.lastTs = ts;
+  let dt = (ts - shootState.lastTs) / 1000;
+  shootState.lastTs = ts;
+  if (dt > 0.05) dt = 0.05;
+  if (dt < 0) dt = 0;
+  updateShoot(dt);
+  renderShoot();
+  if (shootState.active){
+    shootState.rafId = requestAnimationFrame(shootLoop);
+  }
+}
+
+function updateShoot(dt){
+  // 目标移动
+  for (const t of shootState.targets){
+    t.x += t.vx * dt;
+    t.y += t.vy * dt;
+    if (t.x - t.r < 0){ t.x = t.r; t.vx = Math.abs(t.vx); }
+    else if (t.x + t.r > SHOOT_SIZE){ t.x = SHOOT_SIZE - t.r; t.vx = -Math.abs(t.vx); }
+    if (t.y - t.r < 0){ t.y = t.r; t.vy = Math.abs(t.vy); }
+    else if (t.y + t.r > SHOOT_SIZE){ t.y = SHOOT_SIZE - t.r; t.vy = -Math.abs(t.vy); }
+    t.wobble += dt * 4;
+    t.age += dt;
+  }
+  // 粒子
+  const ps = shootState.particles;
+  for (let i = ps.length - 1; i >= 0; i--){
+    const p = ps[i];
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    p.vx *= 0.94;
+    p.vy *= 0.94;
+    p.life -= dt;
+    if (p.life <= 0) ps.splice(i, 1);
+  }
+  // 冲击波
+  const ws = shootState.shockwaves;
+  for (let i = ws.length - 1; i >= 0; i--){
+    const w = ws[i];
+    w.r += w.maxR / w.maxLife * dt * 1.4;
+    w.life -= dt;
+    if (w.life <= 0) ws.splice(i, 1);
+  }
+  // 弹孔
+  const bhs = shootState.bulletHoles;
+  for (let i = bhs.length - 1; i >= 0; i--){
+    const b = bhs[i];
+    b.life -= dt;
+    if (b.life <= 0) bhs.splice(i, 1);
+  }
+  // 震动/闪光衰减
+  shootState.shake *= Math.exp(-10 * dt);
+  if (shootState.shake < 0.15) shootState.shake = 0;
+  shootState.flash *= Math.exp(-14 * dt);
+  if (shootState.flash < 0.02) shootState.flash = 0;
+}
+
+function renderShoot(){
+  const ctx = shootState.ctx;
+  if (!ctx) return;
+
+  // 背景（不震动）
+  if (!shootState.bgCanvas) renderShootBg();
+  ctx.drawImage(shootState.bgCanvas, 0, 0, SHOOT_SIZE, SHOOT_SIZE);
+
+  ctx.save();
+  // 震动
+  if (shootState.shake > 0.1){
+    const sx = (Math.random() - 0.5) * shootState.shake;
+    const sy = (Math.random() - 0.5) * shootState.shake;
+    ctx.translate(sx, sy);
+  }
+
+  // 弹孔
+  for (const b of shootState.bulletHoles){
+    const a = Math.min(1, b.life / 0.8);
+    ctx.fillStyle = 'rgba(0, 0, 0, ' + (a * 0.6) + ')';
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(200, 200, 255, ' + (a * 0.35) + ')';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, 5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // 冲击波
+  for (const w of shootState.shockwaves){
+    const a = w.life / w.maxLife;
+    ctx.strokeStyle = 'hsla(' + w.hue + ', 95%, 72%, ' + (a * 0.85) + ')';
+    ctx.lineWidth = 2.5 * a;
+    ctx.beginPath();
+    ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // 目标
+  for (const t of shootState.targets){
+    drawShootTarget(ctx, t);
+  }
+
+  // 粒子
+  for (const p of shootState.particles){
+    const a = p.life / p.maxLife;
+    ctx.fillStyle = 'hsla(' + p.hue + ', 95%, 72%, ' + a + ')';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size * a + 0.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // 准星
+  if (shootState.showAim && shootState.aimX > -100){
+    drawShootCrosshair(ctx, shootState.aimX, shootState.aimY);
+  }
+
+  ctx.restore();
+
+  // 全屏闪光
+  if (shootState.flash > 0.02){
+    ctx.fillStyle = 'rgba(180, 200, 255, ' + (shootState.flash * 0.25) + ')';
+    ctx.fillRect(0, 0, SHOOT_SIZE, SHOOT_SIZE);
+  }
+}
+
+function drawShootTarget(ctx, t){
+  const wob = 1 + Math.sin(t.wobble) * 0.06;
+  const r = t.r * wob;
+  const x = t.x, y = t.y;
+  const hue = t.hue;
+
+  // 外发光
+  const glow = ctx.createRadialGradient(x, y, r * 0.4, x, y, r * 1.9);
+  glow.addColorStop(0, 'hsla(' + hue + ', 95%, 65%, 0.42)');
+  glow.addColorStop(0.55, 'hsla(' + hue + ', 90%, 55%, 0.18)');
+  glow.addColorStop(1, 'hsla(' + hue + ', 90%, 55%, 0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(x, y, r * 1.9, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 内部填充
+  const inner = ctx.createRadialGradient(x - r*0.3, y - r*0.3, r*0.1, x, y, r);
+  inner.addColorStop(0, 'hsla(' + hue + ', 85%, 78%, 0.55)');
+  inner.addColorStop(0.7, 'hsla(' + hue + ', 80%, 55%, 0.32)');
+  inner.addColorStop(1, 'hsla(' + hue + ', 80%, 45%, 0.15)');
+  ctx.fillStyle = inner;
+  ctx.beginPath();
+  ctx.arc(x, y, r * 0.92, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 外环
+  ctx.strokeStyle = 'hsla(' + hue + ', 95%, 72%, 0.95)';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // 旋转虚线环
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(t.wobble * 0.6);
+  ctx.strokeStyle = 'hsla(' + hue + ', 95%, 82%, 0.7)';
+  ctx.lineWidth = 1.6;
+  ctx.setLineDash([4, 7]);
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.72, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // 中心点
+  ctx.fillStyle = 'hsla(' + hue + ', 100%, 92%, 0.95)';
+  ctx.beginPath();
+  ctx.arc(x, y, r * 0.22, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 十字准星标记
+  ctx.strokeStyle = 'hsla(' + hue + ', 90%, 80%, 0.65)';
+  ctx.lineWidth = 1.4;
+  const mk = r * 1.2;
+  const mlen = r * 0.25;
+  ctx.beginPath();
+  ctx.moveTo(x - mk, y); ctx.lineTo(x - mk + mlen, y);
+  ctx.moveTo(x + mk, y); ctx.lineTo(x + mk - mlen, y);
+  ctx.moveTo(x, y - mk); ctx.lineTo(x, y - mk + mlen);
+  ctx.moveTo(x, y + mk); ctx.lineTo(x, y + mk - mlen);
+  ctx.stroke();
+}
+
+function drawShootCrosshair(ctx, x, y){
+  ctx.save();
+  ctx.strokeStyle = 'rgba(0, 240, 220, 0.85)';
+  ctx.lineWidth = 1.6;
+  const r1 = 6, r2 = 14;
+  ctx.beginPath();
+  ctx.arc(x, y, r1, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x - r2 - 4, y); ctx.lineTo(x - r1 - 1, y);
+  ctx.moveTo(x + r1 + 1, y); ctx.lineTo(x + r2 + 4, y);
+  ctx.moveTo(x, y - r2 - 4); ctx.lineTo(x, y - r1 - 1);
+  ctx.moveTo(x, y + r1 + 1); ctx.lineTo(x, y + r2 + 4);
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(0, 240, 220, 0.9)';
+  ctx.beginPath();
+  ctx.arc(x, y, 1.8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function playShootSound(){
+  if (!state.sound) return;
+  try{
+    const ctx = getCtx();
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'square';
+    o.frequency.setValueAtTime(1400, now);
+    o.frequency.exponentialRampToValueAtTime(180, now + 0.08);
+    g.gain.setValueAtTime(0.075, now);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(now); o.stop(now + 0.12);
+    noiseBurst(0.045, 0.045, 2400, 7000);
+  }catch(e){}
+}
+function playHitSound(){
+  if (!state.sound) return;
+  beep(920, 0.06, 'sine', 0.08);
+  setTimeout(function(){ beep(1380, 0.1, 'sine', 0.07); }, 45);
+  noiseBurst(0.06, 0.05, 800, 5000);
+}
+
+function spawnShootExplosion(x, y, hue){
+  const count = 14;
+  for (let i = 0; i < count; i++){
+    const ang = (i / count) * Math.PI * 2 + Math.random() * 0.35;
+    const spd = 90 + Math.random() * 180;
+    shootState.particles.push({
+      x: x, y: y,
+      vx: Math.cos(ang) * spd,
+      vy: Math.sin(ang) * spd,
+      life: 0.5 + Math.random() * 0.35,
+      maxLife: 0.85,
+      size: 2 + Math.random() * 2.6,
+      hue: hue
+    });
+  }
+  shootState.shockwaves.push({
+    x: x, y: y, r: 4, maxR: 62,
+    life: 0.45, maxLife: 0.45, hue: hue
+  });
+}
+
+function shootAt(px, py){
+  if (!shootState.active) return;
+  if (shootState.shotsLeft <= 0) return;
+  const now = performance.now();
+  if (now - shootState.lastShotTime < 70) return;
+  shootState.lastShotTime = now;
+
+  shootState.shotsLeft--;
+  shootState.shotsFired++;
+  shootState.shake = 7;
+  shootState.flash = 0.65;
+
+  // 找命中目标
+  let hitTarget = null;
+  let bestDist = Infinity;
+  for (const t of shootState.targets){
+    const dx = t.x - px, dy = t.y - py;
+    const d = Math.hypot(dx, dy);
+    if (d <= t.r && d < bestDist){
+      bestDist = d;
+      hitTarget = t;
+    }
+  }
+
+  if (hitTarget){
+    spawnShootExplosion(hitTarget.x, hitTarget.y, hitTarget.hue);
+    const idx = shootState.targets.indexOf(hitTarget);
+    if (idx >= 0) shootState.targets.splice(idx, 1);
+    shootState.hits++;
+    playHitSound();
+    vibrate(12);
+  } else {
+    // 弹孔
+    shootState.bulletHoles.push({ x: px, y: py, life: 1.6 });
+    playShootSound();
+    vibrate(4);
+  }
+
+  updateShootHUD();
+
+  if (shootState.targets.length === 0){
+    winShoot();
+  } else if (shootState.shotsLeft <= 0){
+    loseShoot();
+  }
+}
+
+function winShoot(){
+  if (!shootState.active) return;
+  shootState.active = false;
+  if (shootState.rafId){ cancelAnimationFrame(shootState.rafId); shootState.rafId = null; }
+
+  const accuracy = shootState.shotsFired > 0
+    ? shootState.hits / shootState.shotsFired
+    : 1;
+  const stars = accuracy >= 0.7 ? 3 : accuracy >= 0.5 ? 2 : 1;
+  const gained = 70 + stars * 40 + Math.round(accuracy * 100);
+
+  state.shoot.score += gained;
+  state.shoot.unlocked = Math.max(state.shoot.unlocked, Math.min(SHOOT_TOTAL, shootState.level + 1));
+  save();
+  updateHome();
+
+  beep(880, 0.09, 'sine', 0.08);
+  setTimeout(function(){ beep(1175, 0.1, 'sine', 0.075); }, 90);
+  setTimeout(function(){ beep(1568, 0.16, 'sine', 0.07); }, 185);
+  vibrate(20);
+
+  const isFinal = shootState.level >= SHOOT_TOTAL;
+  const title = isFinal ? t('allClear') : stars === 3 ? t('perfect') : stars === 2 ? t('great') : t('good');
+  const resultText = t('shootResult', {h: shootState.hits, s: shootState.shotsFired});
+
+  openOverlay({
+    icon: stars === 3 ? '🌟' : isFinal ? '🏆' : '🎯',
+    title: title,
+    sub: resultText + ' · +' + gained,
+    stars: stars,
+    enterToNext: !isFinal,
+    primary: isFinal
+      ? { label: t('levelsTitle'), fn: function(){ closeOverlay(); openShootLevels(); } }
+      : { label: t('next'), fn: function(){ closeOverlay(); startShootLevel(shootState.level + 1); } },
+    secondary: { label: t('retry'), fn: function(){ closeOverlay(); startShootLevel(shootState.level); } }
+  });
+}
+
+function loseShoot(){
+  if (!shootState.active) return;
+  shootState.active = false;
+  if (shootState.rafId){ cancelAnimationFrame(shootState.rafId); shootState.rafId = null; }
+
+  beep(220, 0.18, 'sawtooth', 0.055);
+  setTimeout(function(){ beep(150, 0.28, 'sawtooth', 0.055); }, 150);
+  vibrate([40,60,40]);
+
+  const resultText = t('shootResult', {h: shootState.hits, s: shootState.shotsFired});
+  openOverlay({
+    icon: '💥',
+    title: t('shootFail'),
+    sub: resultText,
+    stars: 0,
+    enterToNext: false,
+    primary: { label: t('retry'), fn: function(){ closeOverlay(); startShootLevel(shootState.level); } },
+    secondary: { label: t('levelsTitle'), fn: function(){ closeOverlay(); openShootLevels(); } }
+  });
+}
+
+function bindShootInput(){
+  const c = $('#shootCanvas');
+  if (!c) return;
+
+  const getPos = function(clientX, clientY){
+    const rect = c.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return { x: 0, y: 0 };
+    return {
+      x: (clientX - rect.left) / rect.width * SHOOT_SIZE,
+      y: (clientY - rect.top) / rect.height * SHOOT_SIZE
+    };
+  };
+
+  c.addEventListener('pointerdown', function(e){
+    e.preventDefault();
+    try { getCtx().resume(); } catch (err) {}
+    const p = getPos(e.clientX, e.clientY);
+    shootAt(p.x, p.y);
+  }, {passive: false});
+
+  c.addEventListener('pointermove', function(e){
+    if (e.pointerType === 'touch') return;
+    const p = getPos(e.clientX, e.clientY);
+    shootState.aimX = p.x;
+    shootState.aimY = p.y;
+    shootState.showAim = true;
+  });
+
+  c.addEventListener('pointerleave', function(){
+    shootState.showAim = false;
+  });
+}
+
+/* =========================================================
+   12. SNAKE
    ========================================================= */
 const snakeState = {
   mode:'endless', cols:20, rows:20,
@@ -2089,7 +3023,7 @@ function startSnake(mode){ showScreen('snake'); initSnakeGame(mode); }
 function openSnakeMenu(){ updateHome(); showScreen('snake-menu'); }
 
 /* =========================================================
-   11. PINBALL
+   13. PINBALL
    ========================================================= */
 const PINBALL_TIME = 30;
 const PINBALL_BALL_LIFE = 6.5;
@@ -2484,7 +3418,7 @@ function bindPinballInput(){
 }
 
 /* =========================================================
-   12. RELAX
+   14. RELAX
    ========================================================= */
 let bubbleEls = [];
 function buildBubbles(){
@@ -2830,7 +3764,7 @@ document.querySelectorAll('.relax-tab').forEach(function(tab){
 });
 
 /* =========================================================
-   13. LEVEL SELECT
+   15. LEVEL SELECT
    ========================================================= */
 function buildLevelsInto(gridId, total, unlocked, onPick){
   const grid = document.getElementById(gridId);
@@ -2860,14 +3794,18 @@ function buildColorLevels(){ buildLevelsInto('colorLevelsGrid', COLOR_TOTAL, sta
 function buildMazeLevels(){ buildLevelsInto('mazeLevelsGrid', MAZE_TOTAL, state.maze.unlocked, startMazeLevel); }
 function buildSokobanLevels(){ buildLevelsInto('sokobanLevelsGrid', SOKOBAN_TOTAL, state.sokoban.unlocked, startSokobanLevel); }
 function buildMatchLevels(){ buildLevelsInto('matchLevelsGrid', MATCH_TOTAL, state.match.unlocked, startMatchLevel); }
+function buildSlideLevels(){ buildLevelsInto('slideLevelsGrid', SLIDE_TOTAL, state.slide.unlocked, startSlideLevel); }
+function buildShootLevels(){ buildLevelsInto('shootLevelsGrid', SHOOT_TOTAL, state.shoot.unlocked, startShootLevel); }
 
 function openColorLevels(){ buildColorLevels(); updateHome(); showScreen('color-levels'); scrollToCurrent('colorLevelsGrid', state.color.unlocked, COLOR_TOTAL); }
 function openMazeLevels(){ buildMazeLevels(); updateHome(); showScreen('maze-levels'); scrollToCurrent('mazeLevelsGrid', state.maze.unlocked, MAZE_TOTAL); }
 function openSokobanLevels(){ buildSokobanLevels(); updateHome(); showScreen('sokoban-levels'); scrollToCurrent('sokobanLevelsGrid', state.sokoban.unlocked, SOKOBAN_TOTAL); }
 function openMatchLevels(){ buildMatchLevels(); updateHome(); showScreen('match-levels'); scrollToCurrent('matchLevelsGrid', state.match.unlocked, MATCH_TOTAL); }
+function openSlideLevels(){ buildSlideLevels(); updateHome(); showScreen('slide-levels'); scrollToCurrent('slideLevelsGrid', state.slide.unlocked, SLIDE_TOTAL); }
+function openShootLevels(){ buildShootLevels(); updateHome(); showScreen('shoot-levels'); scrollToCurrent('shootLevelsGrid', state.shoot.unlocked, SHOOT_TOTAL); }
 
 /* =========================================================
-   14. INPUT BINDING
+   16. INPUT BINDING
    ========================================================= */
 function attachSwipe(el, onSwipe){
   let start = null;
@@ -2938,7 +3876,6 @@ function bindMatchInput(){
   const board = $('#matchBoard');
   if (!board) return;
   let touchStart = null;
-
   board.addEventListener('pointerdown', function(e){
     const cell = e.target.closest('.match-cell');
     if (!cell) return;
@@ -2952,14 +3889,12 @@ function bindMatchInput(){
       moved: false
     };
   }, {passive: false});
-
   board.addEventListener('pointermove', function(e){
     if (!touchStart) return;
     const dx = e.clientX - touchStart.x;
     const dy = e.clientY - touchStart.y;
     if (Math.hypot(dx, dy) > 18) touchStart.moved = true;
   }, {passive: true});
-
   board.addEventListener('pointerup', function(e){
     if (!touchStart) return;
     const startInfo = touchStart;
@@ -2967,12 +3902,10 @@ function bindMatchInput(){
     const dx = e.clientX - startInfo.x;
     const dy = e.clientY - startInfo.y;
     const dist = Math.hypot(dx, dy);
-
     if (dist < 18 || !startInfo.moved){
       onMatchTileTap(startInfo.r, startInfo.c);
       return;
     }
-    // 滑动
     let dr = 0, dc = 0;
     if (Math.abs(dx) > Math.abs(dy)) dc = dx > 0 ? 1 : -1;
     else dr = dy > 0 ? 1 : -1;
@@ -2983,17 +3916,18 @@ function bindMatchInput(){
       matchTrySwap(startInfo.r, startInfo.c, nr, nc);
     }
   });
-
   board.addEventListener('pointercancel', function(){ touchStart = null; });
 }
 
 /* =========================================================
-   15. EVENTS
+   17. EVENTS
    ========================================================= */
 $('#colorModeBtn').addEventListener('click', openColorLevels);
 $('#mazeModeBtn').addEventListener('click', openMazeLevels);
 $('#sokobanModeBtn').addEventListener('click', openSokobanLevels);
 $('#matchModeBtn').addEventListener('click', openMatchLevels);
+$('#slideModeBtn').addEventListener('click', openSlideLevels);
+$('#shootModeBtn').addEventListener('click', openShootLevels);
 $('#snakeModeBtn').addEventListener('click', openSnakeMenu);
 $('#pinballModeBtn').addEventListener('click', startPinball);
 $('#relaxModeBtn').addEventListener('click', function(){
@@ -3009,11 +3943,23 @@ $('#colorContinueBtn').addEventListener('click', function(){ startColorLevel(Mat
 $('#mazeContinueBtn').addEventListener('click', function(){ startMazeLevel(Math.min(state.maze.unlocked, MAZE_TOTAL)); });
 $('#sokobanContinueBtn').addEventListener('click', function(){ startSokobanLevel(Math.min(state.sokoban.unlocked, SOKOBAN_TOTAL)); });
 $('#matchContinueBtn').addEventListener('click', function(){ startMatchLevel(Math.min(state.match.unlocked, MATCH_TOTAL)); });
+$('#slideContinueBtn').addEventListener('click', function(){ startSlideLevel(Math.min(state.slide.unlocked, SLIDE_TOTAL)); });
+$('#shootContinueBtn').addEventListener('click', function(){ startShootLevel(Math.min(state.shoot.unlocked, SHOOT_TOTAL)); });
 
 $('#colorBack').addEventListener('click', function(){ colorState.active = false; colorActive = false; clearInterval(colorState.timerId); showScreen('home'); updateHome(); });
 $('#mazeBack').addEventListener('click', function(){ mazeState.active = false; showScreen('home'); updateHome(); });
 $('#sokobanBack').addEventListener('click', function(){ sokobanState.active = false; showScreen('home'); updateHome(); });
 $('#matchBack').addEventListener('click', function(){ matchState.active = false; matchState.busy = false; showScreen('home'); updateHome(); });
+$('#slideBack').addEventListener('click', function(){
+  slideState.active = false;
+  clearInterval(slideState.timerId); slideState.timerId = null;
+  showScreen('home'); updateHome();
+});
+$('#shootBack').addEventListener('click', function(){
+  shootState.active = false;
+  if (shootState.rafId){ cancelAnimationFrame(shootState.rafId); shootState.rafId = null; }
+  showScreen('home'); updateHome();
+});
 $('#snakeBack').addEventListener('click', function(){
   snakeState.running = false;
   if (snakeState.intervalId){ clearInterval(snakeState.intervalId); snakeState.intervalId = null; }
@@ -3029,14 +3975,16 @@ $('#colorLevelsBack').addEventListener('click', function(){ showScreen('home'); 
 $('#mazeLevelsBack').addEventListener('click', function(){ showScreen('home'); updateHome(); });
 $('#sokobanLevelsBack').addEventListener('click', function(){ showScreen('home'); updateHome(); });
 $('#matchLevelsBack').addEventListener('click', function(){ showScreen('home'); updateHome(); });
+$('#slideLevelsBack').addEventListener('click', function(){ showScreen('home'); updateHome(); });
+$('#shootLevelsBack').addEventListener('click', function(){ showScreen('home'); updateHome(); });
 
 function refreshSoundBtns(){
   const icon = state.sound ? '🔊' : '🔈';
-  ['#colorSound','#mazeSound','#sokobanSound','#matchSound','#snakeSound','#pinballSound','#relaxSound'].forEach(function(sel){
+  ['#colorSound','#mazeSound','#sokobanSound','#matchSound','#slideSound','#shootSound','#snakeSound','#pinballSound','#relaxSound'].forEach(function(sel){
     const el = $(sel); if (el) el.textContent = icon;
   });
 }
-['#colorSound','#mazeSound','#sokobanSound','#matchSound','#snakeSound','#pinballSound','#relaxSound'].forEach(function(sel){
+['#colorSound','#mazeSound','#sokobanSound','#matchSound','#slideSound','#shootSound','#snakeSound','#pinballSound','#relaxSound'].forEach(function(sel){
   const el = $(sel);
   if (!el) return;
   el.addEventListener('click', function(){
@@ -3051,6 +3999,8 @@ $('#resetAllBtn').addEventListener('click', function(){
   state.maze = { unlocked:1, score:0 };
   state.sokoban = { unlocked:1, score:0 };
   state.match = { unlocked:1, score:0 };
+  state.slide = { unlocked:1, score:0 };
+  state.shoot = { unlocked:1, score:0 };
   state.snake = { bestEndless:0, bestSurvival:0, bestImmortal:0 };
   state.pinball = { best:0 };
   save(); updateHome();
@@ -3112,11 +4062,19 @@ window.addEventListener('resize', function(){
         boardEl.style.setProperty('--tile-font', Math.round(cellSize * 0.58) + 'px');
       }
     }
+    if ($('#screen-slide').classList.contains('active') && slideState.active){
+      const boardEl = $('#slideBoard');
+      const w = boardEl.clientWidth;
+      if (w){
+        const cellSize = w / slideState.size;
+        boardEl.style.setProperty('--tile-font', Math.round(cellSize * 0.38) + 'px');
+      }
+    }
   }, 180);
 });
 
 /* =========================================================
-   16. BOOT
+   18. BOOT
    ========================================================= */
 load();
 refreshSoundBtns();
@@ -3127,6 +4085,7 @@ bindSokobanInput();
 bindSnakeInput();
 bindPinballInput();
 bindMatchInput();
+bindShootInput();
 startAd();
 </script>
 </body>
